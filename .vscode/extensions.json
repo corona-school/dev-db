@@ -1,5 +1,5 @@
 {
     "recommendations": [
-        "ms-ossdata.vscode-postgresql"
+        "ckolkman.vscode-postgres"
     ]
 }
