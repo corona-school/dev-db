@@ -1,3 +1,5 @@
+/* NOTE: This can be run against PROD without precaution */
+
 /* This is more or less what /api/screening/courses does right now,
    it then also fetches students and tags, but that should be fast
 */

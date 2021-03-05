@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "ckolkman.vscode-postgres"
+        "ckolkman.vscode-postgres",
+        "jgclark.vscode-todo-highlight"
     ]
 }

@@ -1,3 +1,5 @@
+/* NOTE: This can be run against PROD without precaution */
+
 SELECT 
     COUNT(*) as "manual_certificates" 
   FROM participation_certificate 

@@ -1,3 +1,5 @@
+/* WARN: This modifies the testuser!  */
+
 BEGIN TRANSACTION;
 
 SELECT * FROM student WHERE "id" = 3627;

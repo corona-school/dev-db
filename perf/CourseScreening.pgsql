@@ -1,3 +1,5 @@
+/* NOTE: This can be run against PROD without precaution */
+
 EXPLAIN ANALYZE
  SELECT * FROM course
   /* join instructors */

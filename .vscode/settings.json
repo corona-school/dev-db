@@ -1,0 +1,25 @@
+{
+    "todohighlight.keywords": [
+        {
+            "text": "ATTENTION:",
+            "isWholeLine": true,
+            "color": "black",
+            "backgroundColor": "red"
+        },
+        {
+            "text": "NOTE:",
+            "isWholeLine": true,
+            "color": "black",
+            "backgroundColor": "green",
+        },
+        {
+            "text": "WARN:",
+            "isWholeLine": true,
+            "color": "black",
+            "backgroundColor": "orange",
+        }
+    ],
+    "todohighlight.include": [
+       "**.pgsql"
+    ]
+}
