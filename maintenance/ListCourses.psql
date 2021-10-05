@@ -1,0 +1,5 @@
+SELECT "course"."id", "name", MAX("lecture"."createdAt") AS "latest_lecture" FROM "course"
+  LEFT JOIN "subcourse" ON "course"."id" = "subcourse"."courseId"
+  LEFT JOIN "lecture"   ON "lecture"."subcourseId" = "subcourse"."id"
+  GROUP BY "course"."id"
+  ORDER BY "latest_lecture";
