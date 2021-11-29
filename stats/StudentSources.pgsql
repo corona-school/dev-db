@@ -16,6 +16,6 @@ SELECT
 
   FROM "student"
   LEFT JOIN "screening" ON "screening"."studentId" = "student"."id"
-  LEFT JOIN "instructor_screening" ON "screening"."id" = "student"."id"
+  LEFT JOIN "instructor_screening" ON "instructor_screening"."studentId" = "student"."id"
   
   LIMIT 100;
