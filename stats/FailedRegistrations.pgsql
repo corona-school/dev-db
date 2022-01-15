@@ -1,3 +1,5 @@
+/* NOTE: This can be run against PROD without precaution */
+
 SELECT COUNT(*) AS "students total" FROM "student";
 SELECT COUNT(*) AS "pupils total" FROM "pupil";
 
