@@ -28,3 +28,20 @@ SELECT
   WHERE "state" = 0
   GROUP BY "week", "year"
   ORDER BY "year", "week";
+
+SELECT 
+    COUNT(*) AS "notifications_scheduled",
+    "sentAt"::date AS "day"
+  FROM "concrete_notification"
+  WHERE "state" = 0
+  GROUP BY "day"
+  ORDER BY  "day" ASC
+  LIMIT 100;
+
+SELECT 
+  date_part('week', NOW()::date) AS "current_week";
+
+
+SELECT COUNT(*) AS "notifications_account_deactivated"
+  FROM "concrete_notification"
+  WHERE "error" = 'ACCOUNT_DEACTIVATION';
