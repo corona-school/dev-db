@@ -1,7 +1,9 @@
 /* ATTENTION: DEV ONLY! */
 
 ALTER TABLE "match" DROP CONSTRAINT "UQ_MATCH";
-  
+
+CREATE EXTENSION pgcrypto;
+
 INSERT INTO "match" ("studentId", "pupilId", "uuid", "createdAt")
   SELECT 
     1 AS "studentId",
