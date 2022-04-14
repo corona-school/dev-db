@@ -9,6 +9,13 @@ WITH student_subjects AS (
     )
 SELECT COUNT(DISTINCT "id") AS "students_inconsistent_before" FROM "student_subjects" WHERE "subject" IS NULL;
 
+WITH student_subjects AS (
+    SELECT
+      json_array_elements("student"."subjects"::json) AS "subject_any_format"
+      FROM "student"
+    )
+SELECT COUNT(*) AS "subjects_inconsistent_before" FROM "student_subjects";
+
 /* - MIGRATION: Convert 'string' and 'Matlab format' to 'JSON format' */
 WITH reformatting AS (
   SELECT regexp_replace(
@@ -44,5 +51,11 @@ WITH student_subjects AS (
     )
 SELECT COUNT(DISTINCT "id") AS "students_inconsistent_after" FROM "student_subjects" WHERE "subject" IS NULL;
 
+WITH student_subjects AS (
+    SELECT
+      json_array_elements("student"."subjects"::json) ->> 'name' AS "subject"
+      FROM "student"
+    )
+SELECT COUNT(*) AS "subjects_consistent_after" FROM "student_subjects";
 
 ROLLBACK TRANSACTION;

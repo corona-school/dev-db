@@ -9,6 +9,13 @@ WITH pupil_subjects AS (
     )
 SELECT COUNT(DISTINCT "id") AS "pupil_inconsistent_before" FROM "pupil_subjects" WHERE "subject" IS NULL;
 
+WITH pupil_subjects AS (
+    SELECT
+      json_array_elements("pupil"."subjects"::json)
+      FROM "pupil"
+    )
+SELECT COUNT(*) AS "subjects_before" FROM "pupil_subjects";
+
 /* - MIGRATION: Convert 'string' and 'Matlab format' to 'JSON format' */
 WITH reformatting AS (
   SELECT 
@@ -22,13 +29,14 @@ WITH reformatting AS (
   "id"
 FROM "pupil"
 )
-/* UPDATE "pupil"
+UPDATE "pupil"
   SET "subjects" = "reformatting"."new_subjects"
 FROM "reformatting"
-WHERE "pupil"."id" = "reformatting"."id" AND "pupil"."subjects" = "reformatting"."subjects" AND "pupil"."subjects" <> "reformatting"."new_subjects"; */
+WHERE "pupil"."id" = "reformatting"."id" AND "pupil"."subjects" = "reformatting"."subjects" AND "pupil"."subjects" <> "reformatting"."new_subjects";
 
 
-SELECT * FROM "reformatting" WHERE "subjects" <> "new_subjects"; /* -> pupil_formatting_full.json */
+
+/* SELECT * FROM "reformatting" WHERE "subjects" <> "new_subjects"; -> pupil_formatting_full.json */
 /* SELECT COUNT(*) FROM "reformatting" WHERE "subjects" <> "new_subjects"; -> 9486 */
 
 /* - AFTER: Number of pupils with inconsistent subjects -> 0? */
@@ -40,5 +48,11 @@ WITH pupil_subjects AS (
     )
 SELECT COUNT(DISTINCT "id") AS "pupil_inconsistent_after" FROM "pupil_subjects" WHERE "subject" IS NULL;
 
+WITH pupil_subjects AS (
+    SELECT
+      json_array_elements("pupil"."subjects"::json) ->> 'name' AS "subject"
+      FROM "pupil"
+    )
+SELECT COUNT(*) AS "subjects_after" FROM "pupil_subjects";
 
 ROLLBACK TRANSACTION;
