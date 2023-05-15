@@ -6,11 +6,12 @@ SELECT COUNT(*) FROM "match" WHERE "dissolvedAt" IS NOT NULL;
 
 /* Fill the dissolvedAt column from the transaction log */
 UPDATE "match"
-  SET "match"."dissolvedAt" = "match_with_log"."log_dissolvedAt"
+  SET "dissolvedAt" = "match_with_log"."log_dissolvedAt"
   
 FROM (
   SELECT "match"."id" AS "match_id", "match"."dissolved" AS "match_dissolved", "log"."createdAt" AS "log_dissolvedAt"  FROM "match" 
     INNER JOIN "log" ON "match"."id" = ("log"."data"::json->>'matchId')::int
+    WHERE "log"."logtype" = 'matchDissolve'
 ) AS "match_with_log" 
 
 WHERE 
