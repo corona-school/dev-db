@@ -1,0 +1,1 @@
+SELECT to_char("runAt", 'YYYY-MM') AS "month", SUM("matchesCreated") AS "totalMatches", AVG("matchesCreated") AS "averageMatches" FROM "match_pool_run" GROUP BY to_char("runAt", 'YYYY-MM');
